@@ -1,5 +1,6 @@
 import firebase from "firebase/app"
 import "firebase/firestore"
+import "firebase/auth"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDCHNqxE8b6MPcM0UpdEpo5AWFY-YDSLBw",
@@ -16,4 +17,7 @@ firebase.initializeApp(firebaseConfig)
 // init services
 const finTrackaFirestore = firebase.firestore()
 
-export { finTrackaFirestore }
+// init authentication
+const finTrackaAuth = firebase.auth()
+
+export { finTrackaFirestore, finTrackaAuth }

@@ -1,11 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { finTrackaAuth } from "../firebase/config"
 import { useAuthContext } from "../hooks/useAuthContext"
 
 export const useSignup = () => {
+  const [isCancelled, setIsCancelled] = useState(false)
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
+
 
   const signup = async(email, password, displayName) => {
     
@@ -27,18 +29,29 @@ export const useSignup = () => {
       // add display name to user
       await response.user.updateProfile({ displayName })
 
-      setIsPending(false)
-      setError(null)
+      // check if component has unmount
+      if(!isCancelled) {
+        setIsPending(false)
+        setError(null)
+      }
+      
     }
     catch (err){
-      console.log(err.message)
-      setError(err.message)
-      setIsPending(false)
+      if(!isCancelled) {
+        console.log(err.message)
+        setError(err.message)
+        setIsPending(false)
+      }
+      
     }
-    
-
-
   }
+
+  // cleanup
+  useEffect(() => {
+    return () => {
+      setIsCancelled(true)
+    }
+  }, [])
 
   return { error, isPending, signup }
 }

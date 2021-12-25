@@ -1,14 +1,15 @@
 import firebase from "firebase/app"
 import "firebase/firestore"
 import "firebase/auth"
+import env from "react-dotenv";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDCHNqxE8b6MPcM0UpdEpo5AWFY-YDSLBw",
-  authDomain: "fintracker-1b056.firebaseapp.com",
-  projectId: "fintracker-1b056",
-  storageBucket: "fintracker-1b056.appspot.com",
-  messagingSenderId: "797507509181",
-  appId: "1:797507509181:web:137f6d61a564711800d0d4"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_API_ID
 };
 
 // init firebase

@@ -1,5 +1,6 @@
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 // styles
 import { Link } from "react-router-dom";
@@ -8,6 +9,13 @@ import styles from "./Navbar.module.css"
 const Navbar = () => {
   const { logout } = useLogout()
   const { user } = useAuthContext()
+
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate("/login")
+  }
 
   return ( 
     <nav className={styles.navbar}>
@@ -26,7 +34,7 @@ const Navbar = () => {
         { user && (
           <>
             <li>hello, {user.displayName}</li>
-            <li><button className="btn-logout" onClick={() => logout()}>Logout</button></li>
+            <li><button className="btn-logout" onClick={handleLogout}>Logout</button></li>
           </>
           
         )}

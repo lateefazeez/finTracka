@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin"
+import { useNavigate } from "react-router-dom";
 
 // styles
 import styles from "./Login.module.css"
@@ -9,9 +10,12 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const { error, isPending, login } = useLogin()
 
+  const navigate = useNavigate()
+
   const handleSubmit = (e) => {
     e.preventDefault()
     login(email, password)
+    navigate("/")
   }
 
   return ( 

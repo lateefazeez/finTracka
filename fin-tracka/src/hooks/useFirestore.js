@@ -1,5 +1,5 @@
 import { useState, useReducer, useEffect } from "react"
-import { finTrackaFirestore } from "../firebase/config"
+import { finTrackaFirestore, timestamp } from "../firebase/config"
 
 let initialState = {
   isPending : "false",
@@ -41,7 +41,8 @@ export const useFirestore = (collection) => {
     dispatch({ type: "IS_PENDING" })
 
     try {
-      const addedDocument = dbRef.add(doc)
+      const createdAt = timestamp.fromDate(new Date())
+      const addedDocument = dbRef.add({...doc, createdAt })
       dispatchIfNotCancelled({ type: "ADDED_DOCUMENT", payload: addedDocument })
 
     } catch (err) {

@@ -20,4 +20,7 @@ const finTrackaFirestore = firebase.firestore()
 // init authentication
 const finTrackaAuth = firebase.auth()
 
-export { finTrackaFirestore, finTrackaAuth }
+// timestamp
+const timestamp = firebase.firestore.Timestamp
+
+export { finTrackaFirestore, finTrackaAuth, timestamp }

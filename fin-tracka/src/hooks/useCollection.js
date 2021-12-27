@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { finTrackaFirestore } from "../firebase/config"
 
 
-export const useCollection = (collection, _query) => {
+export const useCollection = (collection, _query, _orderBy) => {
   const [documents, setDocuments] = useState(null)
   const [error, setError] = useState(null)
 
@@ -13,12 +13,17 @@ export const useCollection = (collection, _query) => {
   // query is an array and would be different on every function call
 
   const query = useRef(_query).current
+  const orderBy = useRef(_orderBy).current
 
   useEffect(() => {
     let dbRef = finTrackaFirestore.collection(collection)
-    
+
     if (query) {
       dbRef = dbRef.where(...query)
+    }
+
+    if (orderBy) {
+      dbRef = dbRef.orderBy(...orderBy)
     }
 
     const unsubscribe = dbRef.onSnapshot((snapshot) => {
@@ -32,12 +37,13 @@ export const useCollection = (collection, _query) => {
       setError(null)
       setDocuments(results)
     }, (error) => {
+      console.log(error)
       setError("Not able to fetch data")
 
     })
 
     return () => unsubscribe()
-  }, [collection, query])
+  }, [collection, query, orderBy])
 
   return { documents, error }
 }

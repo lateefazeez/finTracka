@@ -10,13 +10,14 @@ const Home = () => {
   const { user } = useAuthContext()
   const { documents, error } = useCollection(
     "transactions",
-    ["userId", "==", user.uid]
+    ["userId", "==", user.uid],
+    ["createdAt", "desc"]
     )
 
   return ( 
     <div className={styles.container}>
       <div className={styles.content}>
-        { error && <p>{error.message}</p> }
+        { error && <p>{error}</p> }
         { documents && <TransactionList transactions={ documents }/>}
       </div>
       <div className={styles.sidebar}>

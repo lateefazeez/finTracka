@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useAuthContext } from "./hooks/useAuthContext"
 
 // pages
@@ -25,8 +25,6 @@ function App() {
           </Routes>
       </BrowserRouter>
       )}
-      
-      
     </div>
   );
 }

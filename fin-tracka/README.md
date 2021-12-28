@@ -1,3 +1,6 @@
+
+!["Screenshot of App Home Page"](https://github.com/lateefazeez/finTracka/blob/master/fin-tracka/src/images/Screen%20Shot%202021-12-27%20at%204.53.15%20PM.png?raw=true)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
